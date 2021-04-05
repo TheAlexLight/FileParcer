@@ -1,4 +1,6 @@
-﻿using _4.FileParcer.Logic;
+﻿using _4.FileParcer.Controller;
+using _4.FileParcer.Logic;
+using ConsoleTaskLibrary;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,37 +15,38 @@ namespace _4.FileParcer
     {
         static void Main(string[] args)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            // Запускаем внутренний таймер объекта Stopwatch
-            
+            FileParcerController parcerController = new FileParcerController();
+
             FileAnalyser fileUser = new FileAnalyser();
             
-            stopwatch.Start();
-            //int count = fileUser.CountOccurrencesInFile("file2.txt", "ABCDEFG");
+            //int count = fileUser.CountOccurrencesInFile("file.txt", "ABCDEFG");
             int count = fileUser.ParceFile("file.txt", "ABCDEFG", "QWERTYVCX");
-            stopwatch.Stop();
 
-            //IncreaseSize();
-            Console.WriteLine("Потрачено миллисекунд на выполнение: " + stopwatch.ElapsedMilliseconds);
+            ConsolePrinter printer = new ConsolePrinter();
+
+            printer.WriteLine("Amount ... = " + count);
+
             //Console.WriteLine("Количество вхождений: " + count);
-            //Console.WriteLine("Потреблено памяти: " + consumedInMegabytes);
-            Console.WriteLine("Количество замен: " + count);
+            //Console.WriteLine("Количество замен: " + count);
 
             
 
             Console.ReadKey();
         }
 
-        public static void IncreaseFileSize()
-        {
-            using (StreamReader sr = new StreamReader("file.txt"))
-            {
-                string[] array;
+        #region IncreaseFileSize
+        //public static void IncreaseFileSize()
+        //{
+        //    using (StreamReader sr = new StreamReader("file.txt"))
+        //    {
+        //        string[] array;
 
-                array = File.ReadAllLines("file.txt");
+        //        array = File.ReadAllLines("file.txt");
 
-                File.AppendAllLines("file2.txt", array);
-            }
-        }
+        //        File.AppendAllLines("file2.txt", array);
+        //    }
+        //}
+
+        #endregion
     }
 }

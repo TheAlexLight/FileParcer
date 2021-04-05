@@ -7,55 +7,38 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic
 {
-    class FileAnalyser
+    class FileAnalyser: IParcer
     {
         public int ParceFile(string fileName, string searchInFile, string replaceInFile)
         {
             string tempFileName = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
-            int count = 0;
 
             try
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                int countReplacement = 0;
 
-                using (StreamReader sr = new StreamReader(path))
+                using (StreamReader reader = new StreamReader(filePath))
                 {
-                    List<string> list = new List<string>();
-                    //List<string> list2 = new List<string>();
+                    List<string> listOfReplacedLines = new List<string>();        
 
-                    //list2 = File.ReadLines(Path.Combine);
-
-                   
-
-                    while (sr.Peek() != -1)
+                    while (reader.Peek() != -1)
                     {
-                        string line = sr.ReadLine();
+                        string lineFromFile = ReplaceOneLine(reader, searchInFile,replaceInFile,ref countReplacement);
 
-                        if (line.Contains(searchInFile))
-                        {
-                            line = line.Replace(searchInFile, replaceInFile);
-                            count++;
-                        }
-
-                        list.Add(line);
-
-                        if (list.Count == 10000)
-                        {
-                            File.AppendAllLines(tempFileName, list);
-                            list.Clear();
-                        }
+                        listOfReplacedLines = AppendLinesIntoAFile(listOfReplacedLines, lineFromFile, tempFileName);
                     }
 
-                    File.AppendAllLines(tempFileName, list);
+                    File.AppendAllLines(tempFileName, listOfReplacedLines);
                 }
 
-                if (File.Exists(path))
+                if (File.Exists(filePath))
                 {
-                    File.Delete(path);
+                    File.Delete(filePath);
                 }
-                File.Move(tempFileName, path);
+                File.Move(tempFileName, filePath);
 
-                return count;
+                return countReplacement;
             }
             catch (Exception) //ToDO:
             {
@@ -66,6 +49,32 @@ namespace _4.FileParcer.Logic
             {
                 File.Delete(tempFileName);
             }
+        }
+
+        private string ReplaceOneLine(StreamReader reader, string searchInFile, string replaceInFile, ref int countReplacement)
+        {
+            string lineFromFile = reader.ReadLine();
+
+            if (lineFromFile.Contains(searchInFile))
+            {
+                lineFromFile = lineFromFile.Replace(searchInFile, replaceInFile);
+                countReplacement++;
+            }
+
+            return lineFromFile;
+        }
+
+        private List<string> AppendLinesIntoAFile(List<string> listOfReplacedLines, string lineFromFile, string tempFileName)
+        {
+            listOfReplacedLines.Add(lineFromFile);
+
+            if (listOfReplacedLines.Count == 10000)
+            {
+                File.AppendAllLines(tempFileName, listOfReplacedLines);
+                listOfReplacedLines.Clear();
+            }
+
+            return listOfReplacedLines;
         }
 
         public int CountOccurrencesInFile(string fileName, string searchInFile)

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SoftServeProjectsLibrary">
+      <HintPath>..\Libraries\SoftServeProjectsLibrary\bin\Debug\SoftServeProjectsLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,9 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\FileParcerController.cs" />
+    <Compile Include="Interfaces\IParcer.cs" />
     <Compile Include="Logic\FileAnalyser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="View\Constant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
