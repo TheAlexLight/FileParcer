@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _4.FileParcer.View;
+using ConsoleTaskLibrary;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +11,8 @@ namespace _4.FileParcer.Logic
 {
     class FileAnalyser: IParcer
     {
+       private readonly ConsolePrinter _printer = new ConsolePrinter();
+
         public int ParceFile(string fileName, string searchInFile, string replaceInFile)
         {
             string tempFileName = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
@@ -40,9 +44,19 @@ namespace _4.FileParcer.Logic
 
                 return countReplacement;
             }
-            catch (Exception) //ToDO:
+            catch (FileNotFoundException ex)
             {
-
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED,ex.Message));
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
                 throw;
             }
             finally
@@ -79,10 +93,28 @@ namespace _4.FileParcer.Logic
 
         public int CountOccurrencesInFile(string fileName, string searchInFile)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            try
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-            return File.ReadLines(Path.Combine(Directory.GetCurrentDirectory(), fileName))
-                   .Where(l => l.Contains(searchInFile)).Count();
+                return File.ReadLines(Path.Combine(Directory.GetCurrentDirectory(), fileName))
+                       .Where(l => l.Contains(searchInFile)).Count();
+            }
+            catch (FileNotFoundException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
+            catch (IOException ex) 
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
         }
     } 
 }

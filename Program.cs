@@ -21,11 +21,11 @@ namespace _4.FileParcer
 
                 if (args.Length == 2)
                 {
-                    parcerController.ExecuteMainOperations(args[0], args[1]);
+                    parcerController.ExecuteSearchingOperations(args[0], args[1]);
                 }
                 else if (args.Length == 3)
                 {
-                    parcerController.ExecuteMainOperations(args[0], args[1]);
+                    parcerController.ExecuteSearchingOperations(args[0], args[1]);
                 }
                 else
                 {

@@ -14,33 +14,94 @@ namespace _4.FileParcer.Controller
         private readonly ConsolePrinter _printer = new ConsolePrinter();
         private readonly Validator _validData = new Validator();
 
-        public void ExecuteMainOperations(string fileName, string stringForCount)
+        public void ExecuteSearchingOperations(string fileName, string stringForCount)
         {
-            fileName = CheckStartString(fileName, Constant.FILE_NAME);
-            stringForCount = CheckStartString(stringForCount, Constant.STRING_FOR_COUNT);
+            try
+            {
 
-            FileAnalyser _fileUser = new FileAnalyser();
+                fileName = CheckStartString(fileName, Constant.FILE_NAME);
 
-           int countOcurrences = _fileUser.CountOccurrencesInFile(fileName, stringForCount);
+                bool isFileExist = false;
 
-            ConsolePrinter _printer = new ConsolePrinter();
+                while (!isFileExist)
+                {
+                    if (!_validData.CheckFilePath(fileName))
+                    {
+                        Console.WriteLine(Constant.FILE_NOT_EXIST);
+                        fileName = EnterNewString(Constant.FILE_NAME);
+                    }
+                    else
+                    {
+                        isFileExist = true;
+                    }
+                }
 
-            _printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES, countOcurrences));
+                stringForCount = CheckStartString(stringForCount, Constant.STRING_FOR_COUNT);
+
+                FileAnalyser _fileUser = new FileAnalyser();
+
+                int countOcurrences = _fileUser.CountOccurrencesInFile(fileName, stringForCount);
+
+                ConsolePrinter _printer = new ConsolePrinter();
+
+                _printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES, countOcurrences));
+
+            }
+            catch (ArgumentException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
+            catch (NullReferenceException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
         }
 
-        public void ExecuteMainOperations(string fileName, string stringForSearching, string stringForReplacing)
+        public void ExecuteReplacingOperations(string fileName, string stringForSearching, string stringForReplacing)
         {
-            fileName = CheckStartString(fileName, Constant.FILE_NAME);
-            stringForSearching = CheckStartString(stringForSearching, Constant.STRING_FOR_COUNT);
-            stringForReplacing = CheckStartString(stringForReplacing, Constant.STRING_FOR_COUNT);
+            try
+            {
 
-            FileAnalyser _fileUser = new FileAnalyser();
+                fileName = CheckStartString(fileName, Constant.FILE_NAME);
 
-            int countReplaces = _fileUser.ParceFile(fileName, stringForSearching, stringForReplacing);
+                bool isFileExist = false;
 
-            ConsolePrinter _printer = new ConsolePrinter();
+                while (!isFileExist)
+                {
+                    if (!_validData.CheckFilePath(fileName))
+                    {
+                        Console.WriteLine(Constant.FILE_NOT_EXIST);
+                        fileName = EnterNewString(Constant.FILE_NAME);
+                    }
+                    else
+                    {
+                        isFileExist = true;
+                    }
+                }
 
-            _printer.WriteLine(string.Format(Constant.AMOUNT_OF_REPLACES, countReplaces));
+                stringForSearching = CheckStartString(stringForSearching, Constant.STRING_FOR_COUNT);
+                stringForReplacing = CheckStartString(stringForReplacing, Constant.STRING_FOR_REPLACING);
+
+                FileAnalyser _fileUser = new FileAnalyser();
+
+                int countReplaces = _fileUser.ParceFile(fileName, stringForSearching, stringForReplacing);
+
+                ConsolePrinter _printer = new ConsolePrinter();
+
+                _printer.WriteLine(string.Format(Constant.AMOUNT_OF_REPLACES, countReplaces));
+            }
+            catch (ArgumentException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
+            catch (NullReferenceException ex)
+            {
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                throw;
+            }
         }
 
         public string CheckStartString(string checkedString, string checkedStringName)
@@ -61,7 +122,7 @@ namespace _4.FileParcer.Controller
 
             while(!rightFormat)
             {
-                _printer.WriteLine(string.Format(Constant.ENTER_PROMPT, checkedStringName));
+                _printer.Write(string.Format(Constant.ENTER_PROMPT, checkedStringName));
 
                 enteredString = _printer.ReadLine();
 
