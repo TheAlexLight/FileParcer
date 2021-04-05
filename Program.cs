@@ -15,23 +15,30 @@ namespace _4.FileParcer
     {
         static void Main(string[] args)
         {
-            FileParcerController parcerController = new FileParcerController();
+            try
+            {
+                FileParcerController parcerController = new FileParcerController();
 
-            FileAnalyser fileUser = new FileAnalyser();
-            
-            //int count = fileUser.CountOccurrencesInFile("file.txt", "ABCDEFG");
-            int count = fileUser.ParceFile("file.txt", "ABCDEFG", "QWERTYVCX");
+                if (args.Length == 2)
+                {
+                    parcerController.ExecuteMainOperations(args[0], args[1]);
+                }
+                else if (args.Length == 3)
+                {
+                    parcerController.ExecuteMainOperations(args[0], args[1]);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
 
-            ConsolePrinter printer = new ConsolePrinter();
+                Console.ReadKey();
+            }
+            catch (Exception)
+            {
 
-            printer.WriteLine("Amount ... = " + count);
-
-            //Console.WriteLine("Количество вхождений: " + count);
-            //Console.WriteLine("Количество замен: " + count);
-
-            
-
-            Console.ReadKey();
+                throw;
+            }
         }
 
         #region IncreaseFileSize
