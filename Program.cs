@@ -1,5 +1,6 @@
 ﻿using _4.FileParcer.Controller;
 using _4.FileParcer.Logic;
+using _4.FileParcer.View;
 using ConsoleTaskLibrary;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace _4.FileParcer
                 }
                 else if (args.Length == 3)
                 {
-                    parcerController.ExecuteSearchingOperations(args[0], args[1]);
+                    parcerController.ExecuteReplacingOperations(args[0], args[1],args[2]);
                 }
                 else
                 {
@@ -36,8 +37,9 @@ namespace _4.FileParcer
             }
             catch (Exception)
             {
-
-                throw;
+                ConsolePrinter _printer = new ConsolePrinter();
+                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
+                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
             }
         }
 

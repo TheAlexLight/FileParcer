@@ -18,34 +18,24 @@ namespace _4.FileParcer.Controller
         {
             try
             {
-
                 fileName = CheckStartString(fileName, Constant.FILE_NAME);
 
-                bool isFileExist = false;
-
-                while (!isFileExist)
+                if (!_validData.CheckFilePath(fileName))
                 {
-                    if (!_validData.CheckFilePath(fileName))
-                    {
-                        Console.WriteLine(Constant.FILE_NOT_EXIST);
-                        fileName = EnterNewString(Constant.FILE_NAME);
-                    }
-                    else
-                    {
-                        isFileExist = true;
-                    }
+                    Console.WriteLine(Constant.FILE_NOT_EXIST);
+                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
+                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
+                    
+                    Environment.Exit(-1);
                 }
 
                 stringForCount = CheckStartString(stringForCount, Constant.STRING_FOR_COUNT);
 
                 FileAnalyser _fileUser = new FileAnalyser();
 
-                int countOcurrences = _fileUser.CountOccurrencesInFile(fileName, stringForCount);
-
-                ConsolePrinter _printer = new ConsolePrinter();
+                int countOcurrences = _fileUser.CountOccurrences(fileName, stringForCount);
 
                 _printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES, countOcurrences));
-
             }
             catch (ArgumentException ex)
             {
@@ -63,22 +53,15 @@ namespace _4.FileParcer.Controller
         {
             try
             {
-
                 fileName = CheckStartString(fileName, Constant.FILE_NAME);
 
-                bool isFileExist = false;
-
-                while (!isFileExist)
+                if (!_validData.CheckFilePath(fileName))
                 {
-                    if (!_validData.CheckFilePath(fileName))
-                    {
-                        Console.WriteLine(Constant.FILE_NOT_EXIST);
-                        fileName = EnterNewString(Constant.FILE_NAME);
-                    }
-                    else
-                    {
-                        isFileExist = true;
-                    }
+                    Console.WriteLine(Constant.FILE_NOT_EXIST);
+                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
+                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
+                   
+                    Environment.Exit(-1);
                 }
 
                 stringForSearching = CheckStartString(stringForSearching, Constant.STRING_FOR_COUNT);
@@ -86,9 +69,7 @@ namespace _4.FileParcer.Controller
 
                 FileAnalyser _fileUser = new FileAnalyser();
 
-                int countReplaces = _fileUser.ParceFile(fileName, stringForSearching, stringForReplacing);
-
-                ConsolePrinter _printer = new ConsolePrinter();
+                int countReplaces = _fileUser.Parce(fileName, stringForSearching, stringForReplacing);
 
                 _printer.WriteLine(string.Format(Constant.AMOUNT_OF_REPLACES, countReplaces));
             }
@@ -105,38 +86,17 @@ namespace _4.FileParcer.Controller
         }
 
         public string CheckStartString(string checkedString, string checkedStringName)
-        {  
+        {
             if (!_validData.CheckStringLength(checkedString))
             {
                 _printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedStringName));
-                checkedString = EnterNewString(checkedStringName); 
+                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
+                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
+
+                Environment.Exit(-1);
             }
 
             return checkedString;
-        }
-
-        private string EnterNewString(string checkedStringName)
-        {
-            string enteredString = "";
-            bool rightFormat = false;
-
-            while(!rightFormat)
-            {
-                _printer.Write(string.Format(Constant.ENTER_PROMPT, checkedStringName));
-
-                enteredString = _printer.ReadLine();
-
-                if (!_validData.CheckStringLength(enteredString))
-                {
-                    _printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedStringName));
-                }
-                else
-                {
-                    rightFormat = true;
-                }
-            }
-
-            return enteredString;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace _4.FileParcer.Logic
     {
        private readonly ConsolePrinter _printer = new ConsolePrinter();
 
-        public int ParceFile(string fileName, string searchInFile, string replaceInFile)
+        public int Parce(string fileName, string searchInFile, string replaceInFile)
         {
             string tempFileName = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
 
@@ -91,7 +91,7 @@ namespace _4.FileParcer.Logic
             return listOfReplacedLines;
         }
 
-        public int CountOccurrencesInFile(string fileName, string searchInFile)
+        public int CountOccurrences(string fileName, string searchInFile)
         {
             try
             {

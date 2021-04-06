@@ -8,7 +8,7 @@ namespace _4.FileParcer
 {
     interface IParcer
     {
-        int ParceFile(string fileName, string searchInFile, string replaceInFile);
-        int CountOccurrencesInFile(string fileName, string searchInFile);
+        int Parce(string fileName, string searchInFile, string replaceInFile);
+        int CountOccurrences(string fileName, string searchInFile);
     }
 }
