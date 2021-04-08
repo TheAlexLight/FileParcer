@@ -69,9 +69,9 @@ namespace _4.FileParcer.Controller
 
                 FileAnalyser _fileUser = new FileAnalyser();
 
-                int countReplaces = _fileUser.Parce(fileName, stringForSearching, stringForReplacing);
+                 _fileUser.Parce(fileName, stringForSearching, stringForReplacing);
 
-                _printer.WriteLine(string.Format(Constant.AMOUNT_OF_REPLACES, countReplaces));
+                _printer.WriteLine(Constant.SUCCESS);
             }
             catch (ArgumentException ex)
             {

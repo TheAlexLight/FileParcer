@@ -1,4 +1,5 @@
-﻿using _4.FileParcer.View;
+﻿using _4.FileParcer.Interfaces;
+using _4.FileParcer.View;
 using ConsoleTaskLibrary;
 using System;
 using System.Collections.Generic;
@@ -11,42 +12,46 @@ namespace _4.FileParcer.Logic
 {
     class FileAnalyser: IParcer
     {
-       private readonly ConsolePrinter _printer = new ConsolePrinter();
+        readonly ConsolePrinter _printer = new ConsolePrinter();
 
-        public int Parce(string fileName, string searchInFile, string replaceInFile)
+        IReplacer stringReplacer = new Replacer();
+        IFileManager manager = new FileManager();
+
+
+
+        public void Parce(string fileName, string searchInFile, string replaceInFile)
         {
             string tempFileName = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
 
             try
             {
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-                int countReplacement = 0;
 
-                using (StreamReader reader = new StreamReader(filePath))
+                bool isEndOfFile = false;
+                int skipLines = 0;
+
+
+                while (!isEndOfFile)
                 {
-                    List<string> listOfReplacedLines = new List<string>();        
+                    List<string> listOfFileLines = manager.ReadLine(filePath, ref skipLines, ref isEndOfFile);
 
-                    while (reader.Peek() != -1)
-                    {
-                        string lineFromFile = ReplaceOneLine(reader, searchInFile,replaceInFile,ref countReplacement);
+                    listOfFileLines = stringReplacer.ReplaceStrings(listOfFileLines, searchInFile, replaceInFile);
 
-                        listOfReplacedLines = AppendLinesIntoAFile(listOfReplacedLines, lineFromFile, tempFileName);
-                    }
-
-                    File.AppendAllLines(tempFileName, listOfReplacedLines);
+                    manager.AppendLines(listOfFileLines, tempFileName);
                 }
 
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
                 }
+
                 File.Move(tempFileName, filePath);
 
-                return countReplacement;
+               // return countReplacement;
             }
             catch (FileNotFoundException ex)
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED,ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
                 throw;
             }
             catch (UnauthorizedAccessException ex)
@@ -63,32 +68,6 @@ namespace _4.FileParcer.Logic
             {
                 File.Delete(tempFileName);
             }
-        }
-
-        private string ReplaceOneLine(StreamReader reader, string searchInFile, string replaceInFile, ref int countReplacement)
-        {
-            string lineFromFile = reader.ReadLine();
-
-            if (lineFromFile.Contains(searchInFile))
-            {
-                lineFromFile = lineFromFile.Replace(searchInFile, replaceInFile);
-                countReplacement++;
-            }
-
-            return lineFromFile;
-        }
-
-        private List<string> AppendLinesIntoAFile(List<string> listOfReplacedLines, string lineFromFile, string tempFileName)
-        {
-            listOfReplacedLines.Add(lineFromFile);
-
-            if (listOfReplacedLines.Count == 10000)
-            {
-                File.AppendAllLines(tempFileName, listOfReplacedLines);
-                listOfReplacedLines.Clear();
-            }
-
-            return listOfReplacedLines;
         }
 
         public int CountOccurrences(string fileName, string searchInFile)
