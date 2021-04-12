@@ -26,7 +26,11 @@ namespace _4.FileParcer
                 }
                 else if (args.Length == 3)
                 {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     parcerController.ExecuteReplacingOperations(args[0], args[1],args[2]);
+                    stopwatch.Stop();
+                    Console.WriteLine(stopwatch.ElapsedMilliseconds); 
                 }
                 else
                 {
@@ -35,8 +39,9 @@ namespace _4.FileParcer
 
                 Console.ReadKey();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ConsolePrinter _printer = new ConsolePrinter();
                 _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
                         Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);

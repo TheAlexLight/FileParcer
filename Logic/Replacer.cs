@@ -7,25 +7,18 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic
 {
-    class Replacer: IReplacer
+    class Replacer : IReplacer
     {
-        public List<string> ReplaceStrings(List<string> listOfFileLines, string stringForSearching, string stringForReplacing)
+        public string ReplaceString(string line, string stringForSearching, string stringForReplacing)
         {
-            List<string> newLinesString = new List<string>();
+            string newLine = line;
 
-            foreach (var line in listOfFileLines)
+            if (line.Contains(stringForSearching))
             {
-                if (line.Contains(stringForSearching))
-                {
-                    newLinesString.Add(line.Replace(stringForSearching, stringForReplacing));
-                }
-                else
-                {
-                    newLinesString.Add(line);
-                }
+                newLine = line.Replace(stringForSearching, stringForReplacing);
             }
 
-            return newLinesString;
+            return newLine;
         }
 
     }

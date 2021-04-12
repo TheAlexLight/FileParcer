@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Interfaces
 {
-    interface IReplacer
+    interface IFileWriter
     {
-        string ReplaceString(string line, string stringForSearching, string stringForReplacing);
+         void WriteLine(string stringToWrite);
     }
 }

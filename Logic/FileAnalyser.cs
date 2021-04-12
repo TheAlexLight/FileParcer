@@ -14,40 +14,40 @@ namespace _4.FileParcer.Logic
     {
         readonly ConsolePrinter _printer = new ConsolePrinter();
 
-        IReplacer stringReplacer = new Replacer();
-        IFileManager manager = new FileManager();
-
-
-
         public void Parce(string fileName, string searchInFile, string replaceInFile)
         {
-            string tempFileName = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
+            string tempFilePath = null; 
+
+             FileWriter writeManager = new FileWriter();
 
             try
             {
+                tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-                bool isEndOfFile = false;
-                int skipLines = 0;
+                FileReader reader = new FileReader(filePath);
 
+                IReplacer stringReplacer = new Replacer();
 
-                while (!isEndOfFile)
+                var writer = writeManager.OpenFile(tempFilePath);
+
+                foreach (var line in reader)
                 {
-                    List<string> listOfFileLines = manager.ReadLine(filePath, ref skipLines, ref isEndOfFile);
-
-                    listOfFileLines = stringReplacer.ReplaceStrings(listOfFileLines, searchInFile, replaceInFile);
-
-                    manager.AppendLines(listOfFileLines, tempFileName);
+                    string newLine = stringReplacer.ReplaceString((string)line, searchInFile, replaceInFile);
+                    writer.WriteLine(newLine);
                 }
 
-                if (File.Exists(filePath))
+                writeManager.Dispose();
+
+                string tempName = string.Format("{0} - temp.txt",filePath);
+
+                if (File.Exists(tempName))
                 {
-                    File.Delete(filePath);
+                    File.Delete(tempName);
                 }
 
-                File.Move(tempFileName, filePath);
-
-               // return countReplacement;
+                File.Move(tempFilePath, tempName);
+                File.Replace(tempName, filePath, string.Format("{0}.bac", filePath));
             }
             catch (FileNotFoundException ex)
             {
@@ -66,7 +66,12 @@ namespace _4.FileParcer.Logic
             }
             finally
             {
-                File.Delete(tempFileName);
+                writeManager.Dispose();
+
+                if (tempFilePath != null)
+                {
+                    File.Delete(tempFilePath);
+                } 
             }
         }
 
