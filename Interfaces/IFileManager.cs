@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Interfaces
 {
-    interface IFileWriter
+    interface IFileManager 
     {
-         void WriteLine(string stringToWrite);
+        IEnumerable<string> ReadFile(string filePath);
+        void WriteLineToFile(string stringToWrite);
     }
 }

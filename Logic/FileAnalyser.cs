@@ -18,26 +18,26 @@ namespace _4.FileParcer.Logic
         {
             string tempFilePath = null; 
 
-             FileWriter writeManager = new FileWriter();
+             FileManager manager = new FileManager();
 
             try
             {
                 tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-                FileReader reader = new FileReader(filePath);
+               // FileReader reader = new FileReader(filePath);
 
                 IReplacer stringReplacer = new Replacer();
 
-                var writer = writeManager.OpenFile(tempFilePath);
+                var writer = manager.OpenFileForWrite(tempFilePath);
 
-                foreach (var line in reader)
+                foreach (var line in manager.ReadFile(filePath))
                 {
                     string newLine = stringReplacer.ReplaceString((string)line, searchInFile, replaceInFile);
                     writer.WriteLine(newLine);
                 }
 
-                writeManager.Dispose();
+                manager.Dispose();
 
                 string tempName = string.Format("{0} - temp.txt",filePath);
 
@@ -66,7 +66,7 @@ namespace _4.FileParcer.Logic
             }
             finally
             {
-                writeManager.Dispose();
+                manager.Dispose();
 
                 if (tempFilePath != null)
                 {
