@@ -50,10 +50,12 @@
     <Compile Include="Interfaces\IFileManager.cs" />
     <Compile Include="Interfaces\IParcer.cs" />
     <Compile Include="Interfaces\IReplacer.cs" />
+    <Compile Include="Logic\Builders\AbstractBuilders\ManagerBuilder.cs" />
+    <Compile Include="Logic\Builders\FileManagerBuilder.cs" />
     <Compile Include="Logic\FileAnalyser.cs" />
     <Compile Include="Logic\FileManager.cs" />
-    <Compile Include="Logic\FileParcerDialog.cs" />
-    <Compile Include="Logic\ParcerDialog.cs" />
+    <Compile Include="Logic\Builders\FileParcerBuilder.cs" />
+    <Compile Include="Logic\Builders\AbstractBuilders\ParcerBuilder.cs" />
     <Compile Include="Logic\Replacer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

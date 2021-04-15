@@ -1,11 +1,13 @@
-﻿using _4.FileParcer.Logic;
-using _4.FileParcer.View;
-using ConsoleTaskLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _4.FileParcer.Interfaces;
+using _4.FileParcer.Logic.Builders;
+using _4.FileParcer.Logic.Builders.AbstractBuilders;
+using _4.FileParcer.View;
+using ConsoleTaskLibrary;
 
 namespace _4.FileParcer.Controller
 {
@@ -34,8 +36,11 @@ namespace _4.FileParcer.Controller
                     Environment.Exit(-1);
                 }
 
-                ParcerDialog dialog = new FileParcerDialog();
-                IParcer parcer = dialog.CreateParcer();
+                ManagerBuilder managerDialog = new FileManagerBuilder();
+                IFileManager manager = managerDialog.CreateManager();
+
+                ParcerBuilder dialog = new FileParcerBuilder();
+                IParcer parcer = dialog.CreateParcer(manager);
 
                 int count;
 

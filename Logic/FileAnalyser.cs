@@ -12,32 +12,35 @@ namespace _4.FileParcer.Logic
 {
    internal class FileAnalyser: IParcer
     {
+        public FileAnalyser(IFileManager manager)
+        {
+            _manager = manager;
+        }
+
         readonly ConsolePrinter _printer = new ConsolePrinter();
+
+        readonly IFileManager _manager;
 
         public void Parce(string fileName, string searchInFile, string replaceInFile)
         {
             string tempFilePath = null; 
-
-             FileManager manager = new FileManager();
 
             try
             {
                 tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-               // FileReader reader = new FileReader(filePath);
-
                 IReplacer stringReplacer = new Replacer();
 
-                var writer = manager.OpenFileForWrite(tempFilePath);
+                var writer = _manager.OpenFileForWrite(tempFilePath);
 
-                foreach (var line in manager.ReadFile(filePath))
+                foreach (var line in _manager.ReadFile(filePath))
                 {
                     string newLine = stringReplacer.ReplaceString((string)line, searchInFile, replaceInFile);
                     writer.WriteLine(newLine);
                 }
 
-                manager.Dispose();
+                _manager.Dispose();
 
                 string tempName = string.Format("{0} - temp.txt",filePath);
 
@@ -66,7 +69,7 @@ namespace _4.FileParcer.Logic
             }
             finally
             {
-                manager.Dispose();
+                _manager.Dispose();
 
                 if (tempFilePath != null)
                 {
