@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _4.FileParcer.Interfaces;
+using _4.FileParcer.Interfaces.Factory;
 using _4.FileParcer.Logic.Builders;
-using _4.FileParcer.Logic.Builders.AbstractBuilders;
 using _4.FileParcer.View;
 using ConsoleTaskLibrary;
 
@@ -36,23 +36,21 @@ namespace _4.FileParcer.Controller
                     Environment.Exit(-1);
                 }
 
-                ManagerBuilder managerDialog = new FileManagerBuilder();
-                IFileManager manager = managerDialog.CreateManager();
 
-                ParcerBuilder parcerDialog = new FileParcerBuilder();
-                IParcer parcer = parcerDialog.CreateParcer(manager);
+                IParcerFactory parcerFactory = new FileParcerBuilder();
+
+                IFileManager manager = parcerFactory.CreateFileManager();
+                IParcer fileParcer = parcerFactory.CreateParcer(manager);
 
                 int count;
 
-                ReplacerBuilder replacerDialog = new LineReplacerBuilder();
-
                 if (args.Length == 2)
                 {
-                    count = parcer.CountOccurrences(checkedArgs);
+                    count = fileParcer.CountOccurrences(checkedArgs);
                 }
                 else
                 {
-                    parcer.Parce(replacerDialog.CreateReplacer(), checkedArgs);
+                    fileParcer.Parce(parcerFactory.CreateReplacer(), checkedArgs);
                 }
             }
             catch (ArgumentException ex)

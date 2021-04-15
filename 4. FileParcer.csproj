@@ -49,15 +49,11 @@
     <Compile Include="Controller\FileParcerController.cs" />
     <Compile Include="Interfaces\IFileManager.cs" />
     <Compile Include="Interfaces\IParcer.cs" />
+    <Compile Include="Interfaces\Factory\IParcerFactory.cs" />
     <Compile Include="Interfaces\IReplacer.cs" />
-    <Compile Include="Logic\Builders\AbstractBuilders\ManagerBuilder.cs" />
-    <Compile Include="Logic\Builders\AbstractBuilders\ReplacerBuilder.cs" />
-    <Compile Include="Logic\Builders\FileManagerBuilder.cs" />
-    <Compile Include="Logic\Builders\LineReplacerBuilder.cs" />
     <Compile Include="Logic\FileAnalyser.cs" />
     <Compile Include="Logic\FileManager.cs" />
     <Compile Include="Logic\Builders\FileParcerBuilder.cs" />
-    <Compile Include="Logic\Builders\AbstractBuilders\ParcerBuilder.cs" />
     <Compile Include="Logic\LineReplacer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,5 @@
 ﻿using _4.FileParcer.Interfaces;
-using _4.FileParcer.Logic.Builders.AbstractBuilders;
+using _4.FileParcer.Interfaces.Factory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,21 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic.Builders
 {
-    class FileParcerBuilder : ParcerBuilder
+    class FileParcerBuilder : IParcerFactory
     {
-        public override IParcer CreateParcer(IFileManager manager)
+        public IFileManager CreateFileManager()
+        {
+            return new FileManager();
+        }
+
+        public IParcer CreateParcer(IFileManager manager)
         {
             return new FileAnalyser(manager);
+        }
+
+        public IReplacer CreateReplacer()
+        {
+            return new LineReplacer();
         }
     }
 }
