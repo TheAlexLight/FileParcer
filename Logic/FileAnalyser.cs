@@ -20,17 +20,21 @@ namespace _4.FileParcer.Logic
         readonly ConsolePrinter _printer = new ConsolePrinter();
 
         readonly IFileManager _manager;
-
-        public void Parce(string fileName, string searchInFile, string replaceInFile)
+       
+        public void Parce(IReplacer stringReplacer, string[] args)
         {
-            string tempFilePath = null; 
+            string tempFilePath = null;  
 
             try
             {
+                IReplacer _stringReplacer = stringReplacer;
+
+                string fileName = args[0];
+                string searchInFile = args[1];
+                string replaceInFile = args[2];
+
                 tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-
-                IReplacer stringReplacer = new Replacer();
 
                 var writer = _manager.OpenFileForWrite(tempFilePath);
 
@@ -78,10 +82,13 @@ namespace _4.FileParcer.Logic
             }
         }
 
-        public int CountOccurrences(string fileName, string searchInFile)
+        public int CountOccurrences(string[] args)
         {
             try
             {
+                string fileName = args[0];
+                string searchInFile = args[1];
+
                 string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
                 return File.ReadLines(Path.Combine(Directory.GetCurrentDirectory(), fileName))

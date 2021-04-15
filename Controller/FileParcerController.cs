@@ -39,18 +39,20 @@ namespace _4.FileParcer.Controller
                 ManagerBuilder managerDialog = new FileManagerBuilder();
                 IFileManager manager = managerDialog.CreateManager();
 
-                ParcerBuilder dialog = new FileParcerBuilder();
-                IParcer parcer = dialog.CreateParcer(manager);
+                ParcerBuilder parcerDialog = new FileParcerBuilder();
+                IParcer parcer = parcerDialog.CreateParcer(manager);
 
                 int count;
 
+                ReplacerBuilder replacerDialog = new LineReplacerBuilder();
+
                 if (args.Length == 2)
                 {
-                    count = parcer.CountOccurrences(checkedArgs[0], checkedArgs[1]);
+                    count = parcer.CountOccurrences(checkedArgs);
                 }
                 else
                 {
-                    parcer.Parce(checkedArgs[0], checkedArgs[1], checkedArgs[2]);
+                    parcer.Parce(replacerDialog.CreateReplacer(), checkedArgs);
                 }
             }
             catch (ArgumentException ex)

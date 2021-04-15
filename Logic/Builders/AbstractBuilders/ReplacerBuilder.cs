@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _4.FileParcer
+namespace _4.FileParcer.Logic.Builders.AbstractBuilders
 {
-    interface IParcer
+    abstract class ReplacerBuilder
     {
-        void Parce(IReplacer stringReplacer, string[] args);
-        int CountOccurrences(string[] args);
+        public abstract IReplacer CreateReplacer();
     }
 }
