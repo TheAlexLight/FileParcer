@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic
 {
-    class FileAnalyser: IParcer
+   internal class FileAnalyser: IParcer
     {
         readonly ConsolePrinter _printer = new ConsolePrinter();
 

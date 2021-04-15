@@ -51,8 +51,10 @@
     <Compile Include="Interfaces\IParcer.cs" />
     <Compile Include="Interfaces\IReplacer.cs" />
     <Compile Include="Logic\FileAnalyser.cs" />
+    <Compile Include="Logic\FileParcerDialog.cs" />
     <Compile Include="Logic\FileReader.cs" />
     <Compile Include="Logic\FileWriter.cs" />
+    <Compile Include="Logic\ParcerDialog.cs" />
     <Compile Include="Logic\Replacer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

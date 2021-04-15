@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic
 {
-    class FileWriter:IFileWriter
+    class FileWriter : IFileWriter
     {
         private StreamWriter writer;
 

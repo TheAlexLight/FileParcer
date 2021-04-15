@@ -14,28 +14,39 @@ namespace _4.FileParcer.Controller
         private readonly ConsolePrinter _printer = new ConsolePrinter();
         private readonly Validator _validData = new Validator();
 
-        public void ExecuteSearchingOperations(string fileName, string stringForCount)
+        public void Initialize(string[] args)
         {
             try
             {
-                fileName = CheckStartString(fileName, Constant.FILE_NAME);
+                string[] checkedArgs = new string[args.Length];
 
-                if (!_validData.CheckFilePath(fileName))
+                for (int i = 0; i < checkedArgs.Length; i++)
+                {
+                    checkedArgs[i] = CheckStartString(args[i]);
+                }
+
+                if (!_validData.CheckFilePath(checkedArgs[0]))
                 {
                     Console.WriteLine(Constant.FILE_NOT_EXIST);
                     _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
                         Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
-                    
+
                     Environment.Exit(-1);
                 }
 
-                stringForCount = CheckStartString(stringForCount, Constant.STRING_FOR_COUNT);
+                ParcerDialog dialog = new FileParcerDialog();
+                IParcer parcer = dialog.CreateParcer();
 
-                FileAnalyser _fileUser = new FileAnalyser();
+                int count;
 
-                int countOcurrences = _fileUser.CountOccurrences(fileName, stringForCount);
-
-                _printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES, countOcurrences));
+                if (args.Length == 2)
+                {
+                    count = parcer.CountOccurrences(checkedArgs[0], checkedArgs[1]);
+                }
+                else
+                {
+                    parcer.Parce(checkedArgs[0], checkedArgs[1], checkedArgs[2]);
+                }
             }
             catch (ArgumentException ex)
             {
@@ -49,47 +60,11 @@ namespace _4.FileParcer.Controller
             }
         }
 
-        public void ExecuteReplacingOperations(string fileName, string stringForSearching, string stringForReplacing)
-        {
-            try
-            {
-                fileName = CheckStartString(fileName, Constant.FILE_NAME);
-
-                if (!_validData.CheckFilePath(fileName))
-                {
-                    Console.WriteLine(Constant.FILE_NOT_EXIST);
-                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
-                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
-                   
-                    Environment.Exit(-1);
-                }
-
-                stringForSearching = CheckStartString(stringForSearching, Constant.STRING_FOR_COUNT);
-                stringForReplacing = CheckStartString(stringForReplacing, Constant.STRING_FOR_REPLACING);
-
-                FileAnalyser _fileUser = new FileAnalyser();
-
-                 _fileUser.Parce(fileName, stringForSearching, stringForReplacing);
-
-                _printer.WriteLine(Constant.SUCCESS);
-            }
-            catch (ArgumentException ex)
-            {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
-                throw;
-            }
-            catch (NullReferenceException ex)
-            {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
-                throw;
-            }
-        }
-
-        public string CheckStartString(string checkedString, string checkedStringName)
+        public string CheckStartString(string checkedString)
         {
             if (!_validData.CheckStringLength(checkedString))
             {
-                _printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedStringName));
+                _printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedString));
                 _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
                         Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
 

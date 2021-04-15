@@ -10,13 +10,11 @@ namespace _4.FileParcer.View
     {
         public const int MAX_STRING_LENGTH = 50;
 
-        public const string WRONG_STRING = "Wrong {0}";
-       // public const string ENTER_PROMPT = "Enter your {0}: ";
-        public const string FILE_NAME = "File name";
-        public const string STRING_FOR_COUNT = "String for count";
-        public const string STRING_FOR_REPLACING = "String for replacing";
+        public const string WRONG_STRING = @"""{0}"" - Wrong string";
+        //public const string FILE_NAME = "File name";
+        //public const string STRING_FOR_COUNT = "String for count";
+        //public const string STRING_FOR_REPLACING = "String for replacing";
         public const string AMOUNT_OF_OCURRENSES = "Amount of occurrenses = {0}";
-        //public const string AMOUNT_OF_REPLACES = "Amount of replaces = {0}";
         public const string FILE_NOT_EXIST = "File not exist";
         public const string ERROR_OCCURED = "Error occured: {0}";
         public const string INSTRUCTION = "Instruction of using: There are 2 possible modes:";

@@ -20,17 +20,9 @@ namespace _4.FileParcer
             {
                 FileParcerController parcerController = new FileParcerController();
 
-                if (args.Length == 2)
+                if (args.Length == 2 || args.Length == 3)
                 {
-                    parcerController.ExecuteSearchingOperations(args[0], args[1]);
-                }
-                else if (args.Length == 3)
-                {
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
-                    parcerController.ExecuteReplacingOperations(args[0], args[1],args[2]);
-                    stopwatch.Stop();
-                    Console.WriteLine(stopwatch.ElapsedMilliseconds); 
+                    parcerController.Initialize(args);
                 }
                 else
                 {

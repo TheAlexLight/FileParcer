@@ -28,9 +28,5 @@ namespace _4.FileParcer.Logic
                 }
             }
         }
-
-        public void Dispose()
-        {
-        }
     }
 }
