@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TasksLibrary;
 
 namespace _4.FileParcer.Logic.Builders
 {
@@ -15,9 +16,9 @@ namespace _4.FileParcer.Logic.Builders
             return new FileManager();
         }
 
-        public IParcer CreateParcer(IFileManager manager)
+        public IParcer CreateParcer(IFileManager manager, IOutsidePrinter printer)
         {
-            return new FileAnalyser(manager);
+            return new FileAnalyser(manager, printer);
         }
 
         public IReplacer CreateReplacer()

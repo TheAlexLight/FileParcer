@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic
 {
-    class LineReplacer : IReplacer
+    internal class LineReplacer : IReplacer
     {
         public string ReplaceString(string line, string stringForSearching, string stringForReplacing)
         {

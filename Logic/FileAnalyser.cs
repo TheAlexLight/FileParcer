@@ -1,25 +1,25 @@
 ﻿using _4.FileParcer.Interfaces;
 using _4.FileParcer.View;
-using ConsoleTaskLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TasksLibrary;
 
 namespace _4.FileParcer.Logic
 {
    internal class FileAnalyser: IParcer
     {
-        public FileAnalyser(IFileManager manager)
+        public FileAnalyser(IFileManager manager, IOutsidePrinter printer)
         {
             _manager = manager;
+            _printer = printer;
         }
 
-        readonly ConsolePrinter _printer = new ConsolePrinter();
-
         readonly IFileManager _manager;
+        readonly IOutsidePrinter _printer;
        
         public void Parce(IReplacer stringReplacer, string[] args)
         {

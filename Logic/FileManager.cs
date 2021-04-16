@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Logic
 {
-    class FileManager : IFileManager
+    internal class FileManager : IFileManager
     {
         StreamWriter _writer;
 
@@ -40,6 +40,5 @@ namespace _4.FileParcer.Logic
                 _writer.Dispose();
             }
         }
-
     }
 }

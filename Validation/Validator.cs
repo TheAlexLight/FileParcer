@@ -1,4 +1,5 @@
-﻿using _4.FileParcer.View;
+﻿using _4.FileParcer.Interfaces;
+using _4.FileParcer.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer
 {
-     class Validator
+    class Validator : IValidator
     {
         public bool CheckStringLength(string checkedString)
         {
@@ -24,7 +25,7 @@ namespace _4.FileParcer
 
         public bool CheckFilePath(string fileName)
         {
-           return File.Exists(Path.Combine(Directory.GetCurrentDirectory(), fileName));
+            return File.Exists(Path.Combine(Directory.GetCurrentDirectory(), fileName));
         }
     }
 }

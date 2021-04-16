@@ -1,14 +1,14 @@
-﻿using _4.FileParcer.Controller;
-using _4.FileParcer.Logic;
-using _4.FileParcer.View;
-using ConsoleTaskLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using _4.FileParcer.Controller;
+using _4.FileParcer.Logic;
+using _4.FileParcer.View;
 
 namespace _4.FileParcer
 {
