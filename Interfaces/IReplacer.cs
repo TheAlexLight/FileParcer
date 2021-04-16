@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Interfaces
 {
-    interface IReplacer
+    public interface IReplacer
     {
         string ReplaceString(string line, string stringForSearching, string stringForReplacing);
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer
 {
-    interface IParcer
+    public interface IParcer
     {
         void Parce(IReplacer stringReplacer, string[] args);
         int CountOccurrences(string[] args);

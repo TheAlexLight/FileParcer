@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Interfaces
 {
-    interface IValidator
+    public interface IValidator
     {
         bool CheckStringLength(string checkedString);
         bool CheckFilePath(string fileName);

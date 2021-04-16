@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Interfaces.Factory
 {
-    interface IValidatorFactory
+    public interface IValidatorFactory
     {
         IValidator CreateValidator();
     }

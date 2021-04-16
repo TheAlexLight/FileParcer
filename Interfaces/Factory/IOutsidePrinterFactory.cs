@@ -8,7 +8,7 @@ using TasksLibrary;
 
 namespace _4.FileParcer.Interfaces.Factory
 {
-    interface IOutsidePrinterFactory
+    public interface IOutsidePrinterFactory
     {
         IOutsidePrinter CreateOusidePrinter();
     }

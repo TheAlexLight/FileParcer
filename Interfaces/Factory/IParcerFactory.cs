@@ -8,7 +8,7 @@ using TasksLibrary;
 
 namespace _4.FileParcer.Interfaces.Factory
 {
-    interface IParcerFactory
+    public interface IParcerFactory
     {
         IFileManager CreateFileManager();
         IParcer CreateParcer(IFileManager manager, IOutsidePrinter printer);

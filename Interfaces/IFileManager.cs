@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace _4.FileParcer.Interfaces
 {
-    interface IFileManager : IDisposable
+    public interface IFileManager : IDisposable
     {
         IEnumerable<string> ReadFile(string filePath);
         void WriteLineToFile(string stringToWrite);
         StreamWriter OpenFileForWrite(string fileName);
-    }
+    } 
 }

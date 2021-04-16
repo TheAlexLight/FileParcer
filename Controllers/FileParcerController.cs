@@ -15,8 +15,9 @@ namespace _4.FileParcer.Controllers
 {
     class FileParcerController : Controller
     {
-        readonly IOutsidePrinterFactory _printerFactory = new ConsolePrinterBuider();
-        readonly IValidatorFactory _validatorFactory = new ValidatorBuilder();
+        public FileParcerController(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory) : base(printerFactory,validatorFactory)
+        {
+        }
 
         public override void Initialize(string[] args)
         {
@@ -51,11 +52,13 @@ namespace _4.FileParcer.Controllers
                 if (args.Length == 2)
                 {
                     count = fileParcer.CountOccurrences(checkedArgs);
+                    printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES,count));
                 }
                 else
                 {
                     fileParcer.Parce(parcerFactory.CreateReplacer(), checkedArgs);
                 }
+
             }
             catch (ArgumentException ex)
             {
