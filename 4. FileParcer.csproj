@@ -47,7 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\FileParcerController.cs" />
+    <Compile Include="Controllers\FileParcerController.cs" />
     <Compile Include="Interfaces\Factory\IOutsidePrinterFactory.cs" />
     <Compile Include="Interfaces\Factory\IValidatorFactory.cs" />
     <Compile Include="Interfaces\IFileManager.cs" />
@@ -58,6 +58,7 @@
     <Compile Include="Logic\Builders\ConsolePrinterBuilder.cs" />
     <Compile Include="Logic\Builders\ValidatorBuilder.cs" />
     <Compile Include="Logic\ConsolePrinter.cs" />
+    <Compile Include="Logic\Abstract\Controller.cs" />
     <Compile Include="Logic\FileAnalyser.cs" />
     <Compile Include="Logic\FileManager.cs" />
     <Compile Include="Logic\Builders\FileParcerBuilder.cs" />

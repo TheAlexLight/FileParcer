@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using _4.FileParcer.Controller;
+using _4.FileParcer.Controllers;
 using _4.FileParcer.Logic;
+using _4.FileParcer.Logic.Abstract;
 using _4.FileParcer.View;
 
 namespace _4.FileParcer
@@ -18,7 +19,7 @@ namespace _4.FileParcer
         {
             try
             {
-                FileParcerController parcerController = new FileParcerController();
+                Controller parcerController = new FileParcerController();
 
                 if (args.Length == 2 || args.Length == 3)
                 {
@@ -31,28 +32,26 @@ namespace _4.FileParcer
 
                 Console.ReadKey();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                Console.WriteLine(ex.Message);
                 ConsolePrinter _printer = new ConsolePrinter();
-                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
-                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
+                _printer.ShowInstruction();
             }
+
+            #region IncreaseFileSize
+            //public static void IncreaseFileSize()
+            //{
+            //    using (StreamReader sr = new StreamReader("file.txt"))
+            //    {
+            //        string[] array;
+
+            //        array = File.ReadAllLines("file.txt");
+
+            //        File.AppendAllLines("file2.txt", array);
+            //    }
+            //}
+
+            #endregion
         }
-
-        #region IncreaseFileSize
-        //public static void IncreaseFileSize()
-        //{
-        //    using (StreamReader sr = new StreamReader("file.txt"))
-        //    {
-        //        string[] array;
-
-        //        array = File.ReadAllLines("file.txt");
-
-        //        File.AppendAllLines("file2.txt", array);
-        //    }
-        //}
-
-        #endregion
     }
 }

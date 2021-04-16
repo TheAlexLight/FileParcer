@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 using _4.FileParcer.Interfaces;
 using _4.FileParcer.Interfaces.Factory;
+using _4.FileParcer.Logic.Abstract;
 using _4.FileParcer.Logic.Builders;
 using _4.FileParcer.View;
 using TasksLibrary;
 
-namespace _4.FileParcer.Controller
+namespace _4.FileParcer.Controllers
 {
-    class FileParcerController
+    class FileParcerController : Controller
     {
         readonly IOutsidePrinterFactory _printerFactory = new ConsolePrinterBuider();
         readonly IValidatorFactory _validatorFactory = new ValidatorBuilder();
 
-        public void Initialize(string[] args)
+        public override void Initialize(string[] args)
         {
             IOutsidePrinter printer = _printerFactory.CreateOusidePrinter();
 
@@ -36,12 +37,9 @@ namespace _4.FileParcer.Controller
                 if (!validator.CheckFilePath(checkedArgs[0]))
                 {
                     Console.WriteLine(Constant.FILE_NOT_EXIST);
-                    printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
-                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
-
+                    printer.ShowInstruction();
                     Environment.Exit(-1);
                 }
-
 
                 IParcerFactory parcerFactory = new FileParcerBuilder();
 
@@ -71,7 +69,7 @@ namespace _4.FileParcer.Controller
             }
         }
 
-        public string CheckStartString(string checkedString)
+        public override string CheckStartString(string checkedString)
         {
             IValidator validator = _validatorFactory.CreateValidator();
             IOutsidePrinter printer = _printerFactory.CreateOusidePrinter();
@@ -79,8 +77,7 @@ namespace _4.FileParcer.Controller
             if (!validator.CheckStringLength(checkedString))
             {
                 printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedString));
-                printer.ShowInstruction(Constant.INSTRUCTION, Constant.COUNT_MODE, Constant.FIRST_ARGUMENT_COUNT_MODE, Constant.SECOND_ARGUMENT_COUNT_MODE,
-                        Constant.REPLACING_MODE, Constant.FIRST_ARGUMENT_REPLACING_MODE, Constant.SECOND_ARGUMENT_REPLACING_MODE, Constant.THIRD_ARGUMENT_REPLACING_MODE);
+                printer.ShowInstruction();
 
                 Environment.Exit(-1);
             }

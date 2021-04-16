@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _4.FileParcer.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,16 @@ namespace _4.FileParcer.Logic
             return Console.ReadLine();
         }
 
-        public void ShowInstruction(params string[] messages)
+        public void ShowInstruction()
         {
-            for (int i = 0; i < messages.Length; i++)
-            {
-                Console.WriteLine(messages[i]);
-            }
+            Console.WriteLine(Constant.INSTRUCTION);
+            Console.WriteLine(Constant.COUNT_MODE);
+            Console.WriteLine(Constant.FIRST_ARGUMENT_COUNT_MODE);
+            Console.WriteLine(Constant.SECOND_ARGUMENT_COUNT_MODE);
+            Console.WriteLine(Constant.REPLACING_MODE);
+            Console.WriteLine(Constant.FIRST_ARGUMENT_REPLACING_MODE);
+            Console.WriteLine(Constant.SECOND_ARGUMENT_REPLACING_MODE);
+            Console.WriteLine(Constant.THIRD_ARGUMENT_REPLACING_MODE);
         }
 
         public void Write(string message)
