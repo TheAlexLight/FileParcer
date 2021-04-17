@@ -25,8 +25,9 @@ namespace _4.FileParcer
             try
             {
                 IValidatorFactory validatorFactory = new ValidatorBuilder();
+                IParcerFactory parcerFactory = new FileParcerBuilder();
 
-                Controller parcerController = new FileParcerController(printerFactory, validatorFactory);
+                Controller parcerController = new FileParcerController(printerFactory, validatorFactory, parcerFactory);
 
                 if (args.Length == 2 || args.Length == 3)
                 {

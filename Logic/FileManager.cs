@@ -10,9 +10,16 @@ namespace _4.FileParcer.Logic
 {
     internal class FileManager : IFileManager
     {
-        StreamWriter _writer;
+        public FileManager(string tempfilePath)
+        {
+            _writer = new StreamWriter(tempfilePath);
+        }
 
-        public IEnumerable<string> ReadFile(string filePath)
+         readonly StreamWriter _writer;
+
+        public StreamWriter Writer => _writer;
+
+        public IEnumerable<string> Read(string filePath)
         {
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -23,12 +30,7 @@ namespace _4.FileParcer.Logic
             }
         }
 
-        public StreamWriter OpenFileForWrite(string fileName)
-        {
-            return _writer = new StreamWriter(fileName);
-        }
-
-        public void WriteLineToFile(string line)
+        public void WriteLine(string line)
         {
             _writer.WriteLine(line);
         }

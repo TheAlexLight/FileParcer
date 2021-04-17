@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using _4.FileParcer.Interfaces.Factory;
+using _4.FileParcer.View;
 using TasksLibrary;
 
 namespace _4.FileParcer.Logic.Builders

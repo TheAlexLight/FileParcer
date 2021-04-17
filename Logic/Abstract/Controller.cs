@@ -12,11 +12,13 @@ namespace _4.FileParcer.Logic.Abstract
     {
         protected readonly IOutsidePrinterFactory _printerFactory;
         protected readonly IValidatorFactory _validatorFactory;
+        protected readonly IParcerFactory _parcerFactory;
 
-        public Controller(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory)
+        public Controller(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory, IParcerFactory parcerFactory)
         {
             _printerFactory = printerFactory;
             _validatorFactory = validatorFactory;
+            _parcerFactory = parcerFactory;
         }
 
         public abstract void Initialize(string[] args);

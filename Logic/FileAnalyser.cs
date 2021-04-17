@@ -33,18 +33,16 @@ namespace _4.FileParcer.Logic
                 string searchInFile = args[1];
                 string replaceInFile = args[2];
 
-                tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-                var writer = _manager.OpenFileForWrite(tempFilePath);
-
-                foreach (var line in _manager.ReadFile(filePath))
+                using (_manager)
                 {
-                    string newLine = stringReplacer.ReplaceString((string)line, searchInFile, replaceInFile);
-                    writer.WriteLine(newLine);
+                    foreach (var line in _manager.Read(filePath))
+                    {
+                        string newLine = stringReplacer.ReplaceString(line, searchInFile, replaceInFile);
+                        _manager.WriteLine(newLine);
+                    }
                 }
-
-                _manager.Dispose();
 
                 string tempName = string.Format("{0} - temp.txt",filePath);
 
@@ -52,6 +50,8 @@ namespace _4.FileParcer.Logic
                 {
                     File.Delete(tempName);
                 }
+
+                tempFilePath = ((FileStream)(_manager.Writer.BaseStream)).Name;
 
                 File.Move(tempFilePath, tempName);
                 File.Replace(tempName, filePath, string.Format("{0}.bac", filePath));
@@ -73,12 +73,10 @@ namespace _4.FileParcer.Logic
             }
             finally
             {
-                _manager.Dispose();
-
                 if (tempFilePath != null)
                 {
                     File.Delete(tempFilePath);
-                } 
+                }
             }
         }
 

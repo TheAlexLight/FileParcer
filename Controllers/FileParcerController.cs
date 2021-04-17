@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ namespace _4.FileParcer.Controllers
 {
     class FileParcerController : Controller
     {
-        public FileParcerController(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory) : base(printerFactory,validatorFactory)
+        public FileParcerController(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory, IParcerFactory parcerFactory) 
+            : base(printerFactory,validatorFactory, parcerFactory)
         {
         }
 
@@ -42,10 +44,10 @@ namespace _4.FileParcer.Controllers
                     Environment.Exit(-1);
                 }
 
-                IParcerFactory parcerFactory = new FileParcerBuilder();
+                string tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
 
-                IFileManager manager = parcerFactory.CreateFileManager();
-                IParcer fileParcer = parcerFactory.CreateParcer(manager, printer);
+                IFileManager manager = _parcerFactory.CreateFileManager(tempFilePath);
+                IParcer fileParcer = _parcerFactory.CreateParcer(manager, printer);
 
                 int count;
 
@@ -56,7 +58,8 @@ namespace _4.FileParcer.Controllers
                 }
                 else
                 {
-                    fileParcer.Parce(parcerFactory.CreateReplacer(), checkedArgs);
+                    fileParcer.Parce(_parcerFactory.CreateReplacer(), checkedArgs);
+                    printer.WriteLine(Constant.SUCCESS);
                 }
 
             }

@@ -9,8 +9,9 @@ namespace _4.FileParcer.Interfaces
 {
     public interface IFileManager : IDisposable
     {
-        IEnumerable<string> ReadFile(string filePath);
-        void WriteLineToFile(string stringToWrite);
-        StreamWriter OpenFileForWrite(string fileName);
+        IEnumerable<string> Read(string filePath);
+        void WriteLine(string stringToWrite);
+
+        StreamWriter Writer { get; }
     } 
 }

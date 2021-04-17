@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using TasksLibrary;
 
-namespace _4.FileParcer.Logic
+namespace _4.FileParcer.View
 {
     internal class ConsolePrinter : IOutsidePrinter
     {

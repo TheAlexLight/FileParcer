@@ -10,7 +10,7 @@ namespace _4.FileParcer.Interfaces.Factory
 {
     public interface IParcerFactory
     {
-        IFileManager CreateFileManager();
+        IFileManager CreateFileManager(string tempFilePath);
         IParcer CreateParcer(IFileManager manager, IOutsidePrinter printer);
         IReplacer CreateReplacer();
     }
