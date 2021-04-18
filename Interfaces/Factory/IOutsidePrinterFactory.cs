@@ -10,6 +10,6 @@ namespace _4.FileParcer.Interfaces.Factory
 {
     public interface IOutsidePrinterFactory
     {
-        IOutsidePrinter CreateOusidePrinter();
+        IOutsidePrinter CreateOutsidePrinter();
     }
 }

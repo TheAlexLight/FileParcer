@@ -7,11 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using _4.FileParcer.Controllers;
-using _4.FileParcer.Interfaces.Factory;
-using _4.FileParcer.Logic;
 using _4.FileParcer.Logic.Abstract;
 using _4.FileParcer.Logic.Builders;
-using _4.FileParcer.View;
 using TasksLibrary;
 
 namespace _4.FileParcer
@@ -20,14 +17,11 @@ namespace _4.FileParcer
     {
         static void Main(string[] args)
         {
-            IOutsidePrinterFactory printerFactory = new ConsolePrinterBuider();
+            FullFactory allFactories = new FullFactory(new ConsolePrinterBuider(), new ValidatorBuilder(), new FileParcerBuilder());
 
             try
             {
-                IValidatorFactory validatorFactory = new ValidatorBuilder();
-                IParcerFactory parcerFactory = new FileParcerBuilder();
-
-                Controller parcerController = new FileParcerController(printerFactory, validatorFactory, parcerFactory);
+                Controller parcerController = new FileParcerController(allFactories.PrinterFactory, allFactories.ValidatorFactory, allFactories.ParcerFactory);
 
                 if (args.Length == 2 || args.Length == 3)
                 {
@@ -42,7 +36,7 @@ namespace _4.FileParcer
             }
             catch (Exception )
             {
-                IOutsidePrinter _printer = printerFactory.CreateOusidePrinter(); 
+                IOutsidePrinter _printer = allFactories.PrinterFactory.CreateOutsidePrinter(); 
                 _printer.ShowInstruction();
             }
 

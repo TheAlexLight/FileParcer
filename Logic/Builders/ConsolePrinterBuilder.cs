@@ -12,7 +12,7 @@ namespace _4.FileParcer.Logic.Builders
 {
     class ConsolePrinterBuider : IOutsidePrinterFactory
     {
-        public IOutsidePrinter CreateOusidePrinter()
+        public IOutsidePrinter CreateOutsidePrinter()
         {
             return new ConsolePrinter();
         }

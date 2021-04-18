@@ -16,9 +16,9 @@ namespace _4.FileParcer.Logic.Builders
             return new FileManager(tempFilePath);
         }
 
-        public IParcer CreateParcer(IFileManager manager, IOutsidePrinter printer)
+        public IParcer CreateParcer(IParcerFactory managerFactory, IOutsidePrinter printer)
         {
-            return new FileAnalyser(manager, printer);
+            return new FileAnalyser(managerFactory, printer);
         }
 
         public IReplacer CreateReplacer()

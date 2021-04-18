@@ -11,7 +11,5 @@ namespace _4.FileParcer.Interfaces
     {
         IEnumerable<string> Read(string filePath);
         void WriteLine(string stringToWrite);
-
-        StreamWriter Writer { get; }
     } 
 }

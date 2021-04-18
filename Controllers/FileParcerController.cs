@@ -23,7 +23,7 @@ namespace _4.FileParcer.Controllers
 
         public override void Initialize(string[] args)
         {
-            IOutsidePrinter printer = _printerFactory.CreateOusidePrinter();
+            IOutsidePrinter printer = _printerFactory.CreateOutsidePrinter();
 
             try
             {
@@ -44,10 +44,7 @@ namespace _4.FileParcer.Controllers
                     Environment.Exit(-1);
                 }
 
-                string tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
-
-                IFileManager manager = _parcerFactory.CreateFileManager(tempFilePath);
-                IParcer fileParcer = _parcerFactory.CreateParcer(manager, printer);
+                IParcer fileParcer = _parcerFactory.CreateParcer(_parcerFactory, printer);
 
                 int count;
 
@@ -78,7 +75,7 @@ namespace _4.FileParcer.Controllers
         public override string CheckStartString(string checkedString)
         {
             IValidator validator = _validatorFactory.CreateValidator();
-            IOutsidePrinter printer = _printerFactory.CreateOusidePrinter();
+            IOutsidePrinter printer = _printerFactory.CreateOutsidePrinter();
 
             if (!validator.CheckStringLength(checkedString))
             {

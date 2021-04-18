@@ -1,4 +1,5 @@
 ﻿using _4.FileParcer.Interfaces;
+using _4.FileParcer.Interfaces.Factory;
 using _4.FileParcer.View;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,13 @@ namespace _4.FileParcer.Logic
 {
    internal class FileAnalyser: IParcer
     {
-        public FileAnalyser(IFileManager manager, IOutsidePrinter printer)
+        public FileAnalyser(IParcerFactory managerFactory, IOutsidePrinter printer)
         {
-            _manager = manager;
+            _managerFactory = managerFactory;
             _printer = printer;
         }
 
-        readonly IFileManager _manager;
+        readonly IParcerFactory _managerFactory;
         readonly IOutsidePrinter _printer;
        
         public void Parce(IReplacer stringReplacer, string[] args)
@@ -34,8 +35,9 @@ namespace _4.FileParcer.Logic
                 string replaceInFile = args[2];
 
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
 
-                using (_manager)
+                using (var _manager = _managerFactory.CreateFileManager(tempFilePath))
                 {
                     foreach (var line in _manager.Read(filePath))
                     {
@@ -50,8 +52,6 @@ namespace _4.FileParcer.Logic
                 {
                     File.Delete(tempName);
                 }
-
-                tempFilePath = ((FileStream)(_manager.Writer.BaseStream)).Name;
 
                 File.Move(tempFilePath, tempName);
                 File.Replace(tempName, filePath, string.Format("{0}.bac", filePath));

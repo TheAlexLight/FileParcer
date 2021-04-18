@@ -17,8 +17,6 @@ namespace _4.FileParcer.Logic
 
          readonly StreamWriter _writer;
 
-        public StreamWriter Writer => _writer;
-
         public IEnumerable<string> Read(string filePath)
         {
             using (StreamReader reader = new StreamReader(filePath))
