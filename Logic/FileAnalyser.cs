@@ -1,17 +1,15 @@
-﻿using _4.FileParcer.Interfaces;
-using _4.FileParcer.Interfaces.Factory;
-using _4.FileParcer.View;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using _4.FileParcer.Interfaces;
+using _4.FileParcer.Interfaces.Factory;
+using _4.FileParcer.View;
 using TasksLibrary;
 
 namespace _4.FileParcer.Logic
 {
-   internal class FileAnalyser: IParcer
+    internal class FileAnalyser: IParcer
     {
         public FileAnalyser(IParcerFactory managerFactory, IOutsidePrinter printer)
         {

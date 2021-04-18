@@ -1,14 +1,11 @@
-﻿using _4.FileParcer.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using _4.FileParcer.Interfaces;
 
 namespace _4.FileParcer.Logic
 {
-    internal class FileManager : IFileManager
+    internal class FileManager : IManager
     {
         public FileManager(string tempfilePath)
         {

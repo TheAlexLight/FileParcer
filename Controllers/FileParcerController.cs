@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using _4.FileParcer.Interfaces;
 using _4.FileParcer.Interfaces.Factory;
 using _4.FileParcer.Logic.Abstract;
-using _4.FileParcer.Logic.Builders;
 using _4.FileParcer.View;
 using TasksLibrary;
 

@@ -50,7 +50,7 @@
     <Compile Include="Controllers\FullFactory.cs" />
     <Compile Include="Interfaces\Factory\IOutsidePrinterFactory.cs" />
     <Compile Include="Interfaces\Factory\IValidatorFactory.cs" />
-    <Compile Include="Interfaces\IFileManager.cs" />
+    <Compile Include="Interfaces\IManager.cs" />
     <Compile Include="Interfaces\IParcer.cs" />
     <Compile Include="Interfaces\Factory\IParcerFactory.cs" />
     <Compile Include="Interfaces\IReplacer.cs" />
