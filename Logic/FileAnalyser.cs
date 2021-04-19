@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-
+using _4.FileParcer.Enums;
 using _4.FileParcer.Interfaces;
 using _4.FileParcer.Interfaces.Factory;
 using _4.FileParcer.View;
@@ -44,29 +44,40 @@ namespace _4.FileParcer.Logic
                     }
                 }
 
-                string tempName = string.Format("{0} - temp.txt",filePath);
 
-                if (File.Exists(tempName))
+                if (File.Exists(string.Format("{0}.bac", filePath)))
                 {
-                    File.Delete(tempName);
+                    File.Delete(string.Format("{0}.bac", filePath));
                 }
 
-                File.Move(tempFilePath, tempName);
-                File.Replace(tempName, filePath, string.Format("{0}.bac", filePath));
+                File.Move(filePath, string.Format("{0}.bac", filePath));
+                File.Move(tempFilePath, filePath);
+
+
+                //string tempName = string.Format("{0} - temp.txt",filePath);
+
+                //if (File.Exists(tempName))
+                //{
+                //    File.Delete(tempName);
+                //}
+
+
+                //File.Move(tempFilePath, tempName);
+                //File.Replace(tempName, filePath, null/*string.Format("{0}.bac", filePath)*/);
             }
             catch (FileNotFoundException ex)
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
             catch (IOException ex)
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
             finally
@@ -92,17 +103,17 @@ namespace _4.FileParcer.Logic
             }
             catch (FileNotFoundException ex)
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
             catch (IOException ex) 
             {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
         }

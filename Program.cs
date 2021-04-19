@@ -25,29 +25,12 @@ namespace _4.FileParcer
                 {
                     throw new ArgumentException();
                 }
-
-                Console.ReadKey();
             }
             catch (Exception )
             {
                 IOutsidePrinter _printer = allFactories.PrinterFactory.CreateOutsidePrinter(); 
                 _printer.ShowInstruction();
             }
-
-            #region IncreaseFileSize
-            //public static void IncreaseFileSize()
-            //{
-            //    using (StreamReader sr = new StreamReader("file.txt"))
-            //    {
-            //        string[] array;
-
-            //        array = File.ReadAllLines("file.txt");
-
-            //        File.AppendAllLines("file2.txt", array);
-            //    }
-            //}
-
-            #endregion
         }
     }
 }

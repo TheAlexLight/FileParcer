@@ -1,5 +1,5 @@
 ﻿using System;
-
+using _4.FileParcer.Enums;
 using _4.FileParcer.Interfaces;
 using _4.FileParcer.Interfaces.Factory;
 using _4.FileParcer.Logic.Abstract;
@@ -33,7 +33,7 @@ namespace _4.FileParcer.Controllers
 
                 if (!validator.CheckFilePath(checkedArgs[0]))
                 {
-                    Console.WriteLine(Constant.FILE_NOT_EXIST);
+                    printer.WriteLine(string.Format(Constant.ERROR_OCCURED, Constant.FILE_NOT_EXIST), (int)Color.Red);
                     printer.ShowInstruction();
                     Environment.Exit(-1);
                 }
@@ -45,23 +45,23 @@ namespace _4.FileParcer.Controllers
                 if (args.Length == 2)
                 {
                     count = fileParcer.CountOccurrences(checkedArgs);
-                    printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES,count));
+                    printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES,count), (int)Color.Red);
                 }
                 else
                 {
                     fileParcer.Parce(_parcerFactory.CreateReplacer(), checkedArgs);
-                    printer.WriteLine(Constant.SUCCESS);
+                    printer.WriteLine(Constant.SUCCESS, (int)Color.Green);
                 }
 
             }
             catch (ArgumentException ex)
             {
-                printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
             catch (NullReferenceException ex)
             {
-                printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message));
+                printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
             }
         }
@@ -73,7 +73,7 @@ namespace _4.FileParcer.Controllers
 
             if (!validator.CheckStringLength(checkedString))
             {
-                printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedString));
+                printer.WriteLine(string.Format(Constant.WRONG_STRING, checkedString), (int)Color.Red);
                 printer.ShowInstruction();
 
                 Environment.Exit(-1);
