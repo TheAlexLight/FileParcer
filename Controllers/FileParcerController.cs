@@ -49,7 +49,7 @@ namespace _4.FileParcer.Controllers
                 }
                 else
                 {
-                    fileParcer.Parce(_parcerFactory.CreateReplacer(), checkedArgs);
+                    fileParcer.Replace(_parcerFactory.CreateReplacer(), checkedArgs);
                     printer.WriteLine(Constant.SUCCESS, (int)Color.Green);
                 }
 

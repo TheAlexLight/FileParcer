@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="_4.FileParcer.Controllers.FileParcerController" Collapsed="true">
+    <Position X="0.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\FileParcerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_4.FileParcer.Controllers.FullFactory">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAABAQAAAAAAAQAAAEAAAAAAAAAgAAA=</HashCode>
+      <FileName>Controllers\FullFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ParcerFactory" />
+      <Property Name="PrinterFactory" />
+      <Property Name="ValidatorFactory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="_4.FileParcer.Program" Collapsed="true">
+    <Position X="13.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_4.FileParcer.Validator" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAA=</HashCode>
+      <FileName>Validation\Validator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.Logic.Abstract.Controller" Collapsed="true">
+    <Position X="0.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAQAQAAAAAAAAAAAQAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Logic\Abstract\Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_4.FileParcer.Logic.Builders.ConsolePrinterBuider" BaseTypeListCollapsed="true">
+    <Position X="3" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Builders\ConsolePrinterBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.Logic.Builders.FileParcerBuilder" BaseTypeListCollapsed="true">
+    <Position X="5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Logic\Builders\FileParcerBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.Logic.Builders.ValidatorBuilder" BaseTypeListCollapsed="true">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Builders\ValidatorBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.Logic.FileAnalyser" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACABAAAAAAACAAAAACA=</HashCode>
+      <FileName>Logic\FileAnalyser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.Logic.FileManager" BaseTypeListCollapsed="true">
+    <Position X="9" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Logic\FileManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.Logic.LineReplacer" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\LineReplacer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.View.ConsolePrinter" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>View\ConsolePrinter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="_4.FileParcer.View.Constant" Collapsed="true">
+    <Position X="13.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CABAAADAAAAAAEABABAAAAAAIAAggAABAAgAAAAEAAA=</HashCode>
+      <FileName>View\Constant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="_4.FileParcer.Interfaces.Factory.IOutsidePrinterFactory">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Factory\IOutsidePrinterFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_4.FileParcer.Interfaces.Factory.IParcerFactory">
+    <Position X="6.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Factory\IParcerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_4.FileParcer.Interfaces.Factory.IValidatorFactory">
+    <Position X="3.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Factory\IValidatorFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_4.FileParcer.Interfaces.IManager">
+    <Position X="9.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_4.FileParcer.Interfaces.IReplacer">
+    <Position X="11" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IReplacer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_4.FileParcer.Interfaces.IValidator">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAA=</HashCode>
+      <FileName>Interfaces\IValidator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="_4.FileParcer.IParcer">
+    <Position X="11" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Interfaces\IParcer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="_4.FileParcer.Enums.Color" Collapsed="true">
+    <Position X="13.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAADAAAAA=</HashCode>
+      <FileName>Enums\Color.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

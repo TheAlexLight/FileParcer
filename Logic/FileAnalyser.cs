@@ -20,7 +20,7 @@ namespace _4.FileParcer.Logic
         readonly IParcerFactory _managerFactory;
         readonly IOutsidePrinter _printer;
        
-        public void Parce(IReplacer stringReplacer, string[] args)
+        public void Replace(IReplacer stringReplacer, string[] args)
         {
             string tempFilePath = null;  
 
@@ -44,7 +44,6 @@ namespace _4.FileParcer.Logic
                     }
                 }
 
-
                 if (File.Exists(string.Format("{0}.bac", filePath)))
                 {
                     File.Delete(string.Format("{0}.bac", filePath));
@@ -52,18 +51,6 @@ namespace _4.FileParcer.Logic
 
                 File.Move(filePath, string.Format("{0}.bac", filePath));
                 File.Move(tempFilePath, filePath);
-
-
-                //string tempName = string.Format("{0} - temp.txt",filePath);
-
-                //if (File.Exists(tempName))
-                //{
-                //    File.Delete(tempName);
-                //}
-
-
-                //File.Move(tempFilePath, tempName);
-                //File.Replace(tempName, filePath, null/*string.Format("{0}.bac", filePath)*/);
             }
             catch (FileNotFoundException ex)
             {

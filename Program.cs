@@ -26,7 +26,7 @@ namespace _4.FileParcer
                     throw new ArgumentException();
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 IOutsidePrinter _printer = allFactories.PrinterFactory.CreateOutsidePrinter(); 
                 _printer.ShowInstruction();
