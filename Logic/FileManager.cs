@@ -9,7 +9,10 @@ namespace _4.FileParcer.Logic
     {
         public FileManager(string tempfilePath)
         {
-            _writer = new StreamWriter(tempfilePath);
+            if (tempfilePath != null)
+            {
+                _writer = new StreamWriter(tempfilePath);
+            }
         }
 
          readonly StreamWriter _writer;

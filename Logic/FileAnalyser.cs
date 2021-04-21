@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using _4.FileParcer.Enums;
 using _4.FileParcer.Interfaces;
 using _4.FileParcer.Interfaces.Factory;
@@ -35,14 +36,14 @@ namespace _4.FileParcer.Logic
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                 tempFilePath = string.Format("{0}{1}.txt", Path.GetTempPath(), Guid.NewGuid().ToString());
 
-                using (var _manager = _managerFactory.CreateFileManager(tempFilePath))
-                {
+                var _manager = _managerFactory.CreateFileManager(tempFilePath);
+                
                     foreach (var line in _manager.Read(filePath))
                     {
                         string newLine = stringReplacer.ReplaceString(line, searchInFile, replaceInFile);
                         _manager.WriteLine(newLine);
                     }
-                }
+                
 
                 if (File.Exists(string.Format("{0}.bac", filePath)))
                 {
@@ -75,10 +76,18 @@ namespace _4.FileParcer.Logic
 
                 string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-                return File.ReadLines(Path.Combine(Directory.GetCurrentDirectory(), fileName))
-                       .Where(l => l.Contains(searchInFile)).Count();
+                var manager = _managerFactory.CreateFileManager(null);
+
+                int count = 0;
+
+                foreach (var line in manager.Read(path))
+                {
+                    count += Regex.Matches(line, searchInFile).Count;
+                }
+
+                return count;
             }
-            catch (IOException ex) 
+            catch (IOException ex)
             {
                 _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
                 throw;
