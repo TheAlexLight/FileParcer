@@ -10,14 +10,14 @@ namespace _4.FileParcer.Controllers
 {
     class FileParcerController : Controller
     {
-        public FileParcerController(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory, IParcerFactory parcerFactory) 
-            : base(printerFactory,validatorFactory, parcerFactory)
+        public FileParcerController(FullFactory allFactories) 
+            : base(allFactories)
         {
         }
 
         public override void Initialize(string[] args)
         {
-            IOutsidePrinter printer = _printerFactory.CreateOutsidePrinter();
+            IOutsidePrinter printer = _allFactories.PrinterFactory.CreateOutsidePrinter();
 
             try
             {
@@ -28,7 +28,7 @@ namespace _4.FileParcer.Controllers
                     checkedArgs[i] = CheckStartString(args[i]);
                 }
 
-                IValidator validator = _validatorFactory.CreateValidator();
+                IValidator validator = _allFactories.ValidatorFactory.CreateValidator();
                
 
                 if (!validator.CheckFilePath(checkedArgs[0]))
@@ -38,18 +38,18 @@ namespace _4.FileParcer.Controllers
                     Environment.Exit(-1);
                 }
 
-                IParcer fileParcer = _parcerFactory.CreateParcer(_parcerFactory, printer);
+                IParcer fileParcer = _allFactories.ParcerFactory.CreateParcer(_allFactories.ParcerFactory, printer);
 
                 int count;
 
                 if (args.Length == 2)
                 {
                     count = fileParcer.CountOccurrences(checkedArgs);
-                    printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES,count), (int)Color.Red);
+                    printer.WriteLine(string.Format(Constant.AMOUNT_OF_OCURRENSES,count), (int)Color.Green);
                 }
                 else
                 {
-                    fileParcer.Replace(_parcerFactory.CreateReplacer(), checkedArgs);
+                    fileParcer.Replace(_allFactories.ParcerFactory.CreateReplacer(), checkedArgs);
                     printer.WriteLine(Constant.SUCCESS, (int)Color.Green);
                 }
 
@@ -68,8 +68,8 @@ namespace _4.FileParcer.Controllers
 
         public override string CheckStartString(string checkedString)
         {
-            IValidator validator = _validatorFactory.CreateValidator();
-            IOutsidePrinter printer = _printerFactory.CreateOutsidePrinter();
+            IValidator validator = _allFactories.ValidatorFactory.CreateValidator();
+            IOutsidePrinter printer = _allFactories.PrinterFactory.CreateOutsidePrinter();
 
             if (!validator.CheckStringLength(checkedString))
             {

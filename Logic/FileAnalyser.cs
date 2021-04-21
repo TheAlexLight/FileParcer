@@ -52,16 +52,6 @@ namespace _4.FileParcer.Logic
                 File.Move(filePath, string.Format("{0}.bac", filePath));
                 File.Move(tempFilePath, filePath);
             }
-            catch (FileNotFoundException ex)
-            {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
-                throw;
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
-                throw;
-            }
             catch (IOException ex)
             {
                 _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
@@ -87,16 +77,6 @@ namespace _4.FileParcer.Logic
 
                 return File.ReadLines(Path.Combine(Directory.GetCurrentDirectory(), fileName))
                        .Where(l => l.Contains(searchInFile)).Count();
-            }
-            catch (FileNotFoundException ex)
-            {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
-                throw;
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _printer.WriteLine(string.Format(Constant.ERROR_OCCURED, ex.Message), (int)Color.Red);
-                throw;
             }
             catch (IOException ex) 
             {

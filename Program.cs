@@ -15,7 +15,7 @@ namespace _4.FileParcer
 
             try
             {
-                Controller parcerController = new FileParcerController(allFactories.PrinterFactory, allFactories.ValidatorFactory, allFactories.ParcerFactory);
+                Controller parcerController = new FileParcerController(allFactories);
 
                 if (args.Length == 2 || args.Length == 3)
                 {
@@ -23,7 +23,7 @@ namespace _4.FileParcer
                 }
                 else
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException(); 
                 }
             }
             catch (Exception)

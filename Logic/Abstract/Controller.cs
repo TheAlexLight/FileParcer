@@ -1,18 +1,15 @@
-﻿using _4.FileParcer.Interfaces.Factory;
+﻿using _4.FileParcer.Controllers;
+using _4.FileParcer.Interfaces.Factory;
 
 namespace _4.FileParcer.Logic.Abstract
 {
     public abstract class Controller
     {
-        protected readonly IOutsidePrinterFactory _printerFactory;
-        protected readonly IValidatorFactory _validatorFactory;
-        protected readonly IParcerFactory _parcerFactory;
+       readonly protected FullFactory _allFactories;
 
-        public Controller(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory, IParcerFactory parcerFactory)
+        public Controller(FullFactory allFactories)
         {
-            _printerFactory = printerFactory;
-            _validatorFactory = validatorFactory;
-            _parcerFactory = parcerFactory;
+            _allFactories = allFactories;
         }
 
         public abstract void Initialize(string[] args);

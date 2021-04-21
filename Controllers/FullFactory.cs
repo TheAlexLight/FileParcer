@@ -2,7 +2,7 @@
 
 namespace _4.FileParcer.Controllers
 {
-    class FullFactory
+    public class FullFactory
     {
         public FullFactory(IOutsidePrinterFactory printerFactory, IValidatorFactory validatorFactory, IParcerFactory parcerFactory)
         {
